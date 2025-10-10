@@ -49,7 +49,7 @@ Importantly, it should contain the `ID`, `Name`, `Formula`, `Ion Species`, `Mass
 ### 2) Edit and run `AssignSampleGroupings.py`
 For `AssignSampleGroupings.py`, **only** the directory/file name of the annotated Mass Profiler CSV output needs to be set by the user. This should be a string object (remember to contain the file name in '' or "", including the `.csv` extension) assigned to the `MassProfilerOutputFileString` object. 
 
-##### Where to make these changed in `AssignSampleGroupings.py`:
+##### Where to make these changes in `AssignSampleGroupings.py`:
 ```
 ##########################################
 ##TODO: User defined inputs (please edit accordingly)
@@ -98,7 +98,7 @@ For `MinimumDetectionThresholdScript.py`, three inputs need to be set:
 - `MassProfilerOutputFileString` as the directory/file name of the annotated Mass Profiler CSV output (same as in `AssignSampleGroupings.py`)
 - `minimum_detection_group_threshold` to set the minimum detection threshold (the minimum proportion samples per sample group that each metabolite should be detected in) as a decimal percentage to 2 significant figures
 
-##### Where to make these changed in `MinimumDetectionThresholdScript.py`:
+##### Where to make these changes in `MinimumDetectionThresholdScript.py`:
 ```
 ##########################################
 ##TODO: User defined inputs (please edit accordingly)
