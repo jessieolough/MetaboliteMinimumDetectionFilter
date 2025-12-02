@@ -5,6 +5,9 @@ Supervisor: Prof. Karl Burgess (karl.burgess@ed.ac.uk)
 Date created: 13/09/2024
 Optimised for annotated Mass Profiler outputs on 08/10/2025
 '''
+import warnings
+#Suppress FutureWarnings (clog up terminal output for some users)
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 import pandas as pd
 
@@ -210,4 +213,5 @@ if __name__ == "__main__":
     print("No. metabolites KEPT by the minimum detection filter", count_UnderMinThreshold)
     print("================================================")
     
+
 
