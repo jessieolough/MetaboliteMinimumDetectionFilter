@@ -71,10 +71,13 @@ If you open this file it should look something like this (of course, with your o
 | GroupC_rep1 |        |
 | GroupC_rep2 |        |
 | GroupC_rep3 |        |
+| Preconditioning1      |        |
+| Preconditioning1        |        |
 | QC_1        |        |
 | QC_2        |        |
 
-Simply fill out the `Groups` column to indicate how the samples should be grouped. Ensure that **QC samples (including QC dilutions) are labelled as `QC`** so that these are appropriately recognised later on. 
+
+Simply fill out the `Groups` column to indicate how the samples should be grouped. Ensure that **QC samples (including QC dilutions) are labelled as `QC`** so that these are appropriately recognised later on. Samples/groups of samples **to be ignored by the minimum detection filter** (e.g. preconditioning runs) should be labelled as `Ignore`.  
 
 ##### Example of a completed `[file_name]_sample_groupings.csv` file
 | Samples     | Groups |
@@ -88,6 +91,8 @@ Simply fill out the `Groups` column to indicate how the samples should be groupe
 | GroupC_rep1 | GroupC |
 | GroupC_rep2 | GroupC |
 | GroupC_rep3 | GroupC |
+| Preconditioning1      | Ignore        |
+| Preconditioning1        | Ignore       |
 | QC_1        | QC     |
 | QC_2        | QC     |
 
