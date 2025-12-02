@@ -6,6 +6,10 @@ Date created: 13/09/2024
 Optimised for annotated Mass Profiler outputs on 08/10/2025
 '''
 
+import warnings
+#Suppress FutureWarnings (can clog up terminal output for some users)
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
 import pandas as pd
 
 ##########################################
@@ -16,6 +20,12 @@ MassProfilerOutputFileString = 'ExampleData_NEG.csv' #'file_name.csv' Remember t
 #Load in the MassProfiler data
 df = pd.read_csv(MassProfilerOutputFileString)
 MassProfilerOutputFileString = MassProfilerOutputFileString.removesuffix(".csv")
+
+##Tidy df
+#Remove whitespace from cells and headers (these are sporadically kept in with MassProfiler outputs)
+df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+df = df.rename(columns=lambda x: x.strip())
+#Ensure that the data in the cells is numeric
 df = df.apply(pd.to_numeric, errors = "ignore")
 
 #Make a list of the samples
