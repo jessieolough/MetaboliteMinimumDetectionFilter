@@ -35,7 +35,9 @@ SampleGroupingsFileString = SampleGroupingsFileString.removesuffix(".csv")
 #Process sample_groupings.csv information
 df_sample_groups = pd.DataFrame(df_sample_groups)
 sample_group_list = list(df_sample_groups["Groups"].unique())
+#Remove samples to not be included in the minimum detection step
 sample_group_list.remove('QC')
+sample_group_list.remove('Ignore')
 
 #Make a list of the samples
 samples = list(df.columns)
@@ -208,3 +210,4 @@ if __name__ == "__main__":
     print("No. metabolites KEPT by the minimum detection filter", count_UnderMinThreshold)
     print("================================================")
     
+
