@@ -5,6 +5,7 @@ Supervisor: Prof. Karl Burgess (karl.burgess@ed.ac.uk)
 Date created: 13/09/2024
 Optimised for annotated Mass Profiler outputs on 08/10/2025
 '''
+
 import warnings
 #Suppress FutureWarnings (clog up terminal output for some users)
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -28,17 +29,25 @@ minimum_detection_group_threshold = 0.33 #Number should be a decimal fraction (e
 #Load in the MassProfiler data
 df = pd.read_csv(MassProfilerOutputFileString)
 MassProfilerOutputFileString = MassProfilerOutputFileString.removesuffix(".csv")
-#Process annotated Mass Profiler output loaded in as a csv file
+
+##Tidy df
+#Remove whitespace from cells and headers (these are sporadically kept in with MassProfiler outputs)
+df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+df = df.rename(columns=lambda x: x.strip())
+#Ensure that the data in the cells is numeric
 df = df.apply(pd.to_numeric, errors = "ignore")
 
 #Load sample_groupings
 SampleGroupingsFileString = f"{MassProfilerOutputFileString}_sample_groupings.csv"
 df_sample_groups = pd.read_csv(SampleGroupingsFileString)
 SampleGroupingsFileString = SampleGroupingsFileString.removesuffix(".csv")
+#To allow downstream joining, make sure that the whitespace is also removed in this file
+df_sample_groups = df_sample_groups.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+df_sample_groups = df_sample_groups.rename(columns=lambda x: x.strip())
 #Process sample_groupings.csv information
 df_sample_groups = pd.DataFrame(df_sample_groups)
 sample_group_list = list(df_sample_groups["Groups"].unique())
-#Remove samples to not be included in the minimum detection step
+#Remove samples not to be included in the minimum detection step
 sample_group_list.remove('QC')
 sample_group_list.remove('Ignore')
 
@@ -210,8 +219,6 @@ if __name__ == "__main__":
     else:
         pass
     print("No. metabolites REMOVED by the minimum detection filter:", count_OverMinThreshold)
-    print("No. metabolites KEPT by the minimum detection filter", count_UnderMinThreshold)
+    print("No. metabolites KEPT by the minimum detection filter:", count_UnderMinThreshold)
     print("================================================")
-    
-
 
